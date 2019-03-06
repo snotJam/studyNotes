@@ -1,0 +1,31 @@
+注解与反射（工作原理）：
+
+    如果我们有一个类A使用了注解，那么可以获取类A的Class对象
+    然后使用isAnnotationPresent(Annotation.class)的方法来判断是不是使用了指定的注解
+    可以通过getAnnotation的方式获取注解类对象，然后就可以获取这个对象中的内容了
+
+    比如我们定义了一个Description注解如下：
+
+        @Target(ElementType.TYPE)
+        @Retention(RetentionPolicy.RUNTIME)
+        public @interface Description{
+            String value();
+        }
+
+    一个Person类使用了注解：
+
+        @Description("I am Annotation")
+        public class Person{....}
+
+    反射获取注解类如下：
+
+        Class c = Class.forName("xxx.xxx.Person");
+        boolean isExist = c.isAnnotationPresent(Description.class); //判断是否使用了指定的注解
+        if(isExist){        //如果使用了
+            Description des = c.getAnnotation(Description.class);    //获取到注解类对象
+            System.out.print(des.value)         //打印这个对象的value值
+        }
+
+
+    那么，对于注解的反射解析，需要编写注解的人来提供服务
+

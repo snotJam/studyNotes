@@ -1,0 +1,43 @@
+注解的属性：
+    注解类只有成员变量，没有方法。且成员变量声明的方式是在变量名后加一个()
+    比如：
+        @Target(ElementType.TYPE)
+        @Retention(RetentionPolicy.RUNTIME)
+        public @interface TestAnnotation{
+            int id();
+            String msg();
+        }
+
+    使用：
+        @TestAnnotation(id=3,msg="hello annotation")
+        public class Test{....}
+
+    注解类中的成员变量，只能是基本类型，还可以定义默认值，比如：
+        int id default -1;
+============================================================================
+
+    如果注解只有一个成员变量，在使用的时候可以直接在后面写值，比如
+    public @interface Check{
+        String value();
+    }
+
+    使用的时候：
+    @Check("hi")就类似于@Check(value="hi")
+
+    如果没有任何属性，使用的时候可以省略括号
+
+============================================================================
+Java自己预置的注解：
+    @Deprecated：过时声明
+
+    @Override：复写方法
+
+    @SupperWarnings：取消警告，比如：@SupperWarning("deprecated")
+
+    @SafeVarargs：参数安全类型注解
+
+    @FunctionalInterface：函数式接口注解，标注接口，与Lambda有关系？
+
+
+
+
